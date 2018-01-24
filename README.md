@@ -3,6 +3,12 @@ Allows for blasting message to multiple people or multiple times through Whatsap
 
 Currently developed for MacOSX users
 
+# Instructions
+
+1) Add exact names of contacts into 'contacts.csv' file
+
+2) Run 'run.command'
+
 # Changelog
 
 Ver 0.2
