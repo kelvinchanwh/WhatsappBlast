@@ -3,7 +3,7 @@ Allows for blasting message to multiple people or multiple times through Whatsap
 
 Currently developed for MacOSX users
 
-Changelog
+# Changelog
 
 Ver 0.2
 Added support for Images and Documents as attachment
