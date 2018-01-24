@@ -32,7 +32,7 @@ def send_message(target):
     time.sleep(1)
 
     # Number of times the message should be sent
-    for i in range(1):
+    for i in range(200):
         try:
             # Check that correct contact choosen
             check_xpath = "//*[@id='main']/header/div[2]/div/div/span[text() = '%s']" % target
@@ -42,10 +42,17 @@ def send_message(target):
             input_box = waits.until(EC.presence_of_element_located((By.XPATH, inp_xpath)))
             input_box.send_keys(Keys.SHIFT, Keys.INSERT)
             time.sleep(0.5)
-            # Sends Message
-            send_xpath = "//*[@id='main']/footer/div[1]/button"
-            send_button = waits.until(EC.presence_of_element_located((By.XPATH, send_xpath)))
-            send_button.click()
+            try:
+                # Sends Message
+                send_xpath = "//*[@id='main']/footer/div[1]/button"
+                send_button = waits.until(EC.presence_of_element_located((By.XPATH, send_xpath)))
+                send_button.click()
+            except TimeoutException:
+                # Sends Attachments
+                send_xpath = "//*[@id='app']/div/div/div[1]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div"
+                send_button = waits.until(EC.presence_of_element_located((By.XPATH, send_xpath)))
+                send_button.click()
+                time.sleep(0.5)
             # Clears search bar for next contact
             y_arg = '//*[@id="side"]/div[2]/div/label/input'
             input_y = waits.until(EC.presence_of_element_located((By.XPATH, y_arg)))
@@ -82,10 +89,16 @@ logout_xpath = "//*[@id='side']/header/div[2]/div/span/div[3]/span/div/ul/li[6]"
 logout_button = waits.until(EC.presence_of_element_located((By.XPATH, logout_xpath)))
 time.sleep(1)
 logout_button.click()
+
+#Makes sure all messages are sent
+
+lgcon_xpath = "//*[@id='app']/div/span[3]/div/div/div/div/div/div/"
+
+while ((EC.visibility_of_element_located((By.XPATH, menu_xpath))) == True):
+    time.sleep(1)
+
 time.sleep(1)
 
 driver.quit()
 
 print('Task Completed')
-
-
